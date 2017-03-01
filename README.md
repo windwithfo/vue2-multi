@@ -15,7 +15,7 @@ Init
 
 Run Server
 
-    npm start or npm run koa
+    npm start or npm run dev
 
 Build code
 
