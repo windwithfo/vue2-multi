@@ -19,10 +19,10 @@ src               源目录
     |    |-css                样式文件夹
     |    |   |-fonts          iconfont资源
     |    |   |-common.less    通用样式
-    |    |   |font.css        iconfont引用
-    |    |   |mixin.less      函数方法定义
-    |    |   |reset.css       reset style
-    |    |   |varable.less    全局样式变量定义
+    |    |   |-font.css        iconfont引用
+    |    |   |-mixin.less      函数方法定义
+    |    |   |-reset.css       reset style
+    |    |   |-varable.less    全局样式变量定义
     |    |-imgs    图片文件夹
     |    |-js               js文件夹
     |    |   |-test.js    测试js
@@ -37,7 +37,7 @@ src               源目录
     |    |   |-home.html    页面模板
     |    |   |-home.js      页面入口文件
     |    |   |-Home.vue     页面组件
-    |    |-list    bootstrap调试模板
+    |    |-list             bootstrap调试模板
     |    |   |-...
     |
     |-plugins     vue通用插件文件夹
