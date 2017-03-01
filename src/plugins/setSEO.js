@@ -3,34 +3,48 @@
  * @author windwithfo(windwithfo@yeah.net)
  */
 
-// 初始化SEO
-const initSEO = {
-    title: 'emiya title',
-    keywords: 'emiya keywords',
-    description: 'emiya description'
+let SeoPlugin = {};
+
+SeoPlugin.install = function (Vue) {
+    // 初始化SEO
+    const initSEO = {
+        title: 'emiya title',
+        keywords: 'emiya keywords',
+        description: 'emiya description'
+    };
+
+    /**
+     * 初始化页面seo信息
+     * @param {Object} info              seo
+     * @param {String=} info.title       title
+     * @param {String=} info.keywords    keywords
+     * @param {String=} info.description description
+     * @example  this.$setSEO({title:'xxx'})
+     */
+    Vue.prototype.$setSEO = (info = initSEO) => {
+        info.title = info.title || initSEO.title;
+        info.keywords = info.keywords || initSEO.keywords;
+        info.description = info.description || initSEO.description;
+        document.querySelector('title').textContent = info.title;
+        document.querySelector('meta[name=\'keywords\']').setAttribute('content', info.keywords);
+        document.querySelector('meta[name=\'description\']').setAttribute('content', info.description);
+        let ua = window.navigator.userAgent.toLowerCase();
+        let str = ua.match(/MicroMessenger/i);
+        if (str && str.indexOf('micromessenger') > -1) {
+            let hnode = document.createElement('iframe');
+            hnode.src = '/favicon.ico';
+            hnode.id = 'iframe';
+            hnode.style.display = 'none';
+            hnode.onload = () => {
+                setTimeout(() => {
+                    hnode.remove();
+                }, 0);
+            };
+            document.body.appendChild(hnode);
+        }
+    };
 };
 
-// 分别获取Index页面 title keywords description
-const appTitle = document.querySelector('title');
-const appKey = document.querySelector("meta[name='keywords']");
-const appDes = document.querySelector("meta[name='description']");
-
-/**
- * 初始化页面seo信息
- * @param {Object} info              seo
- * @param {String=} info.title       title
- * @param {String=} info.keywords    keywords
- * @param {String=} info.description description
- * @example  this.$setSEO({title:'xxx'})
- */
-const setSEO = function (info = initSEO) {
-    info.title = info.title || initSEO.title;
-    info.keywords = info.keywords || initSEO.keywords;
-    info.description = info.description || initSEO.description;
-
-    appTitle.textContent = info.title;
-    appKey.setAttribute('content', info.keywords);
-    appDes.setAttribute('content', info.description);
+export default {
+    ...SeoPlugin
 };
-
-module.exports = setSEO;
