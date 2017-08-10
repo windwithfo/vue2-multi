@@ -18,25 +18,25 @@ Vue.use(VueResource);
 
 // components
 import {
-    Select,
-    Radio,
-    RadioGroup,
-    Checkbox,
-    CheckboxGroup,
-    select,
-    option,
-    tabs,
-    tabPane,
-    breadcrumb,
-    breadcrumbItem,
-    table,
-    tableColumn,
-    pagination,
-    tree,
-    menu,
-    submenu,
-    menuItem,
-    Popover
+  Select,
+  Radio,
+  RadioGroup,
+  Checkbox,
+  CheckboxGroup,
+  select,
+  option,
+  tabs,
+  tabPane,
+  breadcrumb,
+  breadcrumbItem,
+  table,
+  tableColumn,
+  pagination,
+  tree,
+  menu,
+  submenu,
+  menuItem,
+  Popover
 } from 'element-ui';
 
 Vue.use(Select);
@@ -61,9 +61,9 @@ Vue.use(Popover);
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    template: '<Home/>',
-    components: {
-        Home
-    }
+  el: '#app',
+  template: '<Home/>',
+  components: {
+    Home
+  }
 });

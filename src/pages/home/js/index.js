@@ -5,5 +5,5 @@
 
 const name = 'home';
 export default {
-    name
+  name
 };

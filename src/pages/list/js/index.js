@@ -5,5 +5,5 @@
 
 const name = 'list';
 export default {
-    name
+  name
 };

@@ -4,15 +4,15 @@
  */
 
 let pages = {
-    home: 'pages/home/home.js',
-    list: 'pages/list/list.js'
+  home: 'pages/home/home.js',
+  list: 'pages/list/list.js'
 };
 
 let vendors = {
-    vue: 'vue'
+  vue: 'vue'
 };
 
 export default {
-    pages,
-    vendors
+  pages,
+  vendors
 };

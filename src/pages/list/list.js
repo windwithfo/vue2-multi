@@ -18,17 +18,17 @@ Vue.use(VueResource);
 
 // components
 import {
-    Button,
-    Select
+  Button,
+  Select
 } from 'element-ui';
 Vue.use(Button);
 Vue.use(Select);
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    template: '<List/>',
-    components: {
-        List
-    }
+  el: '#app',
+  template: '<List/>',
+  components: {
+    List
+  }
 });
