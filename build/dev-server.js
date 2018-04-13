@@ -29,18 +29,19 @@ const devMiddleware = DevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
   stats: {
     colors: true,
-    chunks: false
+    chunks: false,
+    modules: false,
+    children: false
   }
 });
 
 let hotMiddleware = HotMiddleware(compiler);
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
-  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+  compilation.plugin('html-webpack-plugin-after-emit', function () {
     hotMiddleware.publish({
       action: 'reload'
     });
-    cb();
   });
 });
 
@@ -66,8 +67,9 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 
 // serve pure static assets
-const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
-app.use(staticPath, express.static('./static'));
+// const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
+// app.use(staticPath, express.static('./static'));
+app.use(express.static('./static'));
 
 app.get('/mock/*', function (req, res) {
   let tmp = req.url.split('?');
@@ -84,7 +86,7 @@ app.listen(port, function (err) {
   let uri = 'http://localhost:' + port;
   console.log('Listening at ' + uri + '\n');
   // when env is testing, don't need open it
-  if (process.env.NODE_ENV !== 'testing') {
-    opn(uri);
-  }
+  // if (process.env.NODE_ENV !== 'testing') {
+  //   opn(uri);
+  // }
 });

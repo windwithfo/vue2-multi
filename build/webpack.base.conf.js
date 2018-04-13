@@ -9,24 +9,12 @@ import config  from './config';
 import entry   from '../src/entry';
 import postcss from 'postcss-cssnext';
 import Html    from 'html-webpack-plugin';
-import Extract from 'extract-text-webpack-plugin';
+import Extract from 'mini-css-extract-plugin';
 
 const projectRoot = path.resolve(__dirname, '../');
 
-let plugins = [];
-let entries = Object.assign({}, entry.pages, entry.vendors);
-
-plugins.push(new webpack.optimize.CommonsChunkPlugin({
-  names: ['vue','manifest']
-}));
-
-let extractStyl = new Extract({
-  filename: '[name].[contenthash].css',
-  disable: false,
-  allChunks: true
-});
-
-plugins.push(extractStyl);
+const plugins = [];
+const entries = Object.assign({}, entry.pages, entry.vendors);
 
 initHtml();
 
@@ -57,6 +45,37 @@ function assetsPath(_path) {
 
 let webpackConfig = {
   entry: entries,
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        default: {
+          minChunks: 1,
+          priority: -20,
+          reuseExistingChunk: true
+        },
+        vendor1: {
+          name: 'vue',
+          test: /node_modules\/vue/,
+          priority: 10,
+          enforce: true
+        },
+        vendor2: {
+          name: 'mint',
+          test: /node_modules\/mint-ui/,
+          priority: 10,
+          enforce: true
+        },
+        style: {
+          name: 'style',
+          test: /\.css/,
+          chunks: 'all',
+          minChunks: 1,
+          enforce: true
+        }
+      }
+    }
+  },
   output: {
     path: config.build.assetsRoot,
     publicPath: '/',
@@ -95,17 +114,11 @@ let webpackConfig = {
       },
       {
         test: /\.css$/,
-        loader: extractStyl.extract({
-          fallbackLoader: 'style',
-          loader: 'css'
-        })
+        use: [Extract.loader, 'css']
       },
       {
         test: /\.less$/,
-        loader: extractStyl.extract({
-          fallbackLoader: 'vue-style',
-          loader: 'css!less'
-        })
+        use: [Extract.loader, 'css', 'less']
       },
       {
         test: /\.js$/,

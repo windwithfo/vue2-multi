@@ -3,13 +3,17 @@
  * @author windwithfo(windwithfo@yeah.net)
  */
 
-import path     from 'path';
-import glob     from 'glob';
-import webpack  from 'webpack';
-import config   from './config';
-import merge    from 'webpack-merge';
-import base     from './webpack.base.conf';
-import Compress from 'compression-webpack-plugin';
+import path           from 'path';
+import glob           from 'glob';
+import webpack        from 'webpack';
+import config         from './config';
+import merge          from 'webpack-merge';
+import base           from './webpack.base.conf';
+import UglifyJs       from 'uglifyjs-webpack-plugin';
+import Extract        from 'mini-css-extract-plugin';
+import Compress       from 'compression-webpack-plugin';
+import CSSAssets      from 'optimize-css-assets-webpack-plugin';
+import BundleAnalyzer from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin';
 
 const projectRoot = path.resolve(__dirname, '../');
 
@@ -21,6 +25,7 @@ function assetsPath(_path) {
 }
 
 let webpackConfig = merge(base, {
+  mode: 'production',
   performance: {
     hints: false
   },
@@ -32,9 +37,13 @@ let webpackConfig = merge(base, {
     chunkFilename: assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: useMap
-    })
+    new Extract({
+      filename: 'css/app.[name].css',
+      chunkFilename: 'css/app.[contenthash:12].css'
+    }),
+    // new BundleAnalyzer({
+    //   analyzerMode: 'static'
+    // })
   ]
 })
 

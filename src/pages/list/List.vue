@@ -29,19 +29,26 @@
 </template>
 
 <script>
-  import js from './js/index';
-  
+  import js    from './js/index';
+  import fetch from 'isomorphic-fetch';
+
   console.log(js.name);
-  
+
   export default {
     name: 'list',
-    created: function () {
-      this.$http.get('/mock/test').then((response) => {
+    mounted: function () {
+      fetch('/mock/errorCode.json').then((response) => {
+        if (response.status >= 400) {
+          throw new Error('Bad response from server');
+        }
+        // body to json
+        return response.json();
+      }).then((json) => {
         // success callback
-        console.log(response);
-      }, (response) => {
+        console.log(json);
+      }, (error) => {
         // error callback
-        console.log(response);
+        console.log(error);
       });
     }
   };

@@ -89,9 +89,7 @@ module.exports = {
     // 变量初始化时不能直接给它赋值为undefined
     'no-undef-init': 1,
     // jsdoc规则
-    'valid-jsdoc': [1, {
-      requireReturn: false
-    }],
+    'valid-jsdoc': 1,
     // 禁止比较时使用NaN，只能用isNaN()
     'use-isnan': 1,
     // 函数定义时括号前面要不要有空格
@@ -135,18 +133,18 @@ module.exports = {
     // 注释风格要不要有空格什么的
     'spaced-comment': 1,
     // 禁止不必要的计算性能键对象的文字
-    'no-useless-computed-key': 0,
+    'no-useless-computed-key': 1,
     'no-var': 1,
     'no-const-assign': 1,
     'object-property-newline': 1,
-    'object-curly-newline': [1, {
+    'object-curly-newline': [0, {
       minProperties: 1
     }],
-    'object-curly-spacing': [1, 'never'],
+    'object-curly-spacing': [1, 'always'],
     'no-new-object': 1,
     // !!的使用
     "no-extra-boolean-cast": 0,
     // 字符串拼接风格
-    "operator-linebreak": [2, "before"]
+    "operator-linebreak": [2, 'before']
   }
 }
