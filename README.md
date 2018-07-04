@@ -1,28 +1,29 @@
 vue2-multi
 ===
-a project with vue2 and webpack2 for multi pages
+a project with vue2 and webpack4 for multi pages
 ***
 
-Install with:
+## Usage Example
+===
 
-    npm install vue2-multi
-
-##Usage Example
-
-Init
+Install dependencies
 
     npm install
 
-Run Server
+Init project (build dll)
 
-    npm start or npm run dev
+    npm run init
 
-Build code
+Run develop
 
-    npm run build
+    npm start
+
+Build project
+
+    npm run pub
 
 Pages config
-`src/entry.js`
+`configs/entry.js`
 
 Proxy config
-`build/config.js`
+`configs/config.js`
