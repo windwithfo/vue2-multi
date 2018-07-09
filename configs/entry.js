@@ -6,9 +6,32 @@
 import fs   from 'fs';
 import path from 'path';
 
+function resolve(dir) {
+  return path.join(__dirname, '../src/views', dir);
+}
+
 let pages = {
-  home: 'view/home/home.js',
-  list: 'view/list/list.js'
+  home: {
+    show: true,
+    path: resolve('index/index'),
+    title: 'home',
+    meta: {
+      keywords: 'home',
+      description: 'home',
+      viewport: 'initial-scale=1, maximum-scale=1',
+      'format-detection': 'telephone=no',
+      'format-detection': 'email=no',
+    }
+  },
+  list: {
+    show: true,
+    path: resolve('list/list'),
+    title: 'list',
+    meta: {
+      keywords: 'list',
+      description: 'list'
+    }
+  }
 };
 
 // auto get entry
@@ -40,6 +63,6 @@ function readDirSync(root) {
   return js;
 }
 
-pages = getEntry();
+// pages = getEntry();
 
 export default pages;

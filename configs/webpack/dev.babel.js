@@ -115,11 +115,16 @@ for (const page in entry) {
   webpackConfig.plugins.push(
     new Html({
       filename: page + '.html',
-      template: entry[page].replace('.ts', '.html'),
+      template: path.join(__dirname, '../../temp', 'html.ejs'),
       inject: true,
       excludeChunks: Object.keys(entry).filter(function (item) {
         return (item !== page);
       }),
+      meta: entry[page].meta,
+      templateParameters: {
+        title: entry[page].title || '',
+        vendor: config.build.assetsPublicPath + 'static/dll.vendor.js',
+      },
     })
   );
 }

@@ -12,8 +12,13 @@ import manifest   from '../../static/vendor-manifest';
 
 import { VueLoaderPlugin } from 'vue-loader';
 
+const entrys = {};
+Object.keys(entry).forEach((item) => {
+  entrys[item] = entry[item].path;
+});
+
 const webpackConfig = {
-  entry: entry,
+  entry: entrys,
   resolve: {
     modules: [
       'node_modules',
